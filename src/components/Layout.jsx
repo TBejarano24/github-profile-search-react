@@ -54,7 +54,7 @@ export default function Layout() {
   console.log(profileRepos);
 
   return (
-    <div className="bg-[#20293A]">
+    <div>
       <section className="h-[230px] w-full bg-[url(/hero-image-github-profile.png)] bg-cover bg-center flex justify-center">
         <div className="grid grid-cols-[0.7fr_5fr] w-[85%] bg-[#20293A] h-[50px] rounded-md mt-6 max-w-[400px]">
           <button className="w-full">
@@ -122,6 +122,16 @@ export default function Layout() {
                     {repo?.description}
                   </p>
                   <div className="flex w-full gap-3">
+                    {repo?.license ? (
+                      <div className="flex font-semibold items-center gap-1">
+                        <img src="/Chield_alt.svg" alt="license" />
+                        <span className="text-[#97A3B6] text-[17px]">
+                          {repo?.license?.spdx_id}
+                        </span>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                     {repo?.forks ? (
                       <div className="flex font-semibold items-center gap-1">
                         <img src="/Nesting.svg" alt="nesting" />
@@ -132,14 +142,24 @@ export default function Layout() {
                     ) : (
                       ""
                     )}
-                    <div className="flex font-semibold items-center gap-1">
-                      <img src="/Star.svg" alt="star" />
-                      <span className="text-[#97A3B6] text-[17px]">703</span>
-                    </div>
+                    {repo?.stargazers_count ? (
+                      <div className="flex font-semibold items-center gap-1">
+                        <img src="/Star.svg" alt="star" />
+                        <span className="text-[#97A3B6] text-[17px]">
+                          {repo?.stargazers_count}
+                        </span>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
-                  <span className="text-[#97A3B6] text-[12px]">
-                    Updated 4 days ago
-                  </span>
+                  {repo?.updated_at ? (
+                    <span className="text-[#97A3B6] text-[12px]">
+                      Updated 4 days ago
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             );
